@@ -1,22 +1,41 @@
 import React, {Component} from 'react';
-import TaskList from './TaskList';
 
 class Task extends Component {
 
-    sendDeleteTask = () => {
-        this.props.deleteTask(this.props.index)
+    deleteTask = () => {
+        this.props.deleteTask(this.props.idSend)
+    }
+
+    clickCheckbox = () => {
+        this.props.clickCheckbox(this.props.idSend)
     }
 
     render(){
-        return <tr>
-            <td>
-                <div>
-                <input type = 'checkbox' id = {this.props.index}/>
-                {this.props.name}
-                <button type="submit" id = {this.props.index} onClick = {this.sendDeleteTask}>Delete</button>
-                </div>
-            </td>
-        </tr>
+        if(this.props.checkedSend === 'true'){
+            return ( 
+                <tr>
+                    <td>
+                        <>
+                            <input type = 'checkbox' checked = 'checked' id = {this.props.idSend} onClick = {this.clickCheckbox}/>
+                            {this.props.textSend}
+                            <button type="button" id = {this.props.idSend} onClick = {this.deleteTask}>Delete</button>
+                        </>
+                    </td>
+                </tr>
+            )
+        } else {
+            return (
+                <tr>
+                    <td>
+                        <>
+                            <input type = 'checkbox' id = {this.props.idSend} onClick = {this.clickCheckbox}/>
+                            {this.props.textSend}
+                            <button type="button" id = {this.props.idSend} onClick = {this.deleteTask}>Delete</button>
+                        </>
+                    </td>
+                </tr>
+                )
+            }
     }
 }
 
